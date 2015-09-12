@@ -15,6 +15,7 @@ public class Lexico {
     //Cynthia
     // &
     //Uriel
+    //
     public Lexico(String texto) {
         //String con todo el codigo
         lista_separada_linea = new StringTokenizer(texto,"\n");
