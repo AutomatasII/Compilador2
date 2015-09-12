@@ -48,10 +48,12 @@ public class Lexico {
             System.out.println("NO");
         }
         
-       /* Pattern pat_reservadas = Pattern.compile("(auto|const|double|float|int|"
+        
+        Pattern pat_reservadas = Pattern.compile("(auto|const|double|float|int|"
                 + "short|struct|unsigned|break|continue|else|for|long|signed|"
                 + "switch|void|case|default|enum|goto|register|sizeof|typedef|"
-                + "volatile|char|do|extern|if|return|static|union|while)");
+                + "volatile|char|string|do|extern|if|return|static|union|while|"
+                + "true|false|using|namespace|std)");
         Matcher mat_reservadas = pat_reservadas.matcher(elemento);
         if (mat_reservadas.matches())
         {
@@ -62,9 +64,10 @@ public class Lexico {
             System.out.println("NO");
         }
         
-        Pattern pat_opAritmeticos = Pattern.compile("(\\+|\\-|\\*|\\/)");
+        
+        Pattern pat_opAritmeticos = Pattern.compile("(\\+|-|\\*|/|%)");
         Matcher mat_opAritmeticos = pat_opAritmeticos.matcher(elemento);
-        if (mat_reservadas.matches())
+        if (mat_opAritmeticos.matches())
         {
             System.out.println("SI");
         }
@@ -72,6 +75,93 @@ public class Lexico {
         {
             System.out.println("NO");
         }*/
+        
+        
+        Pattern pat_opAsignacion = Pattern.compile("(=|\\*=|/=|%=|\\+=|-=|<<=|>>=|&=|\\^=|\\|=)");
+        Matcher mat_opAsignacion = pat_opAsignacion.matcher(elemento);
+        if (mat_opAsignacion.matches())
+        {
+            System.out.println("SI");
+        }
+        else
+        {
+            System.out.println("NO");
+        }
+        
+        
+        Pattern pat_puntuacion = Pattern.compile("(.|,|;|:)");
+        Matcher mat_puntuacion = pat_puntuacion.matcher(elemento);
+        if (mat_puntuacion.matches())
+        {
+            System.out.println("SI");
+        }
+        else
+        {
+            System.out.println("NO");
+        }
+        
+        
+        Pattern pat_opComparacion = Pattern.compile("(==|!=|>|<|<=|>=)");
+        Matcher mat_opComparacion = pat_opComparacion.matcher(elemento);
+        if (mat_opComparacion.matches())
+        {
+            System.out.println("SI");
+        }
+        else
+        {
+            System.out.println("NO");
+        }
+        
+        
+        Pattern pat_opLogicos = Pattern.compile("(&&|\\|\\||!)");
+        Matcher mat_opLogicos = pat_opLogicos.matcher(elemento);
+        if (mat_opLogicos.matches())
+        {
+            System.out.println("SI");
+        }
+        else
+        {
+            System.out.println("NO");
+        }
+        
+        
+        Pattern pat_agrupan = Pattern.compile("(\\(|\\)|\\{|\\}|\\[|\\]|[\"]|[\'])");
+        Matcher mat_agrupan = pat_agrupan.matcher(elemento);
+        if (mat_agrupan.matches())
+        {
+            System.out.println("SI");
+        }
+        else
+        {
+            System.out.println("NO");
+        }
+        
+        
+        Pattern pat_simbolos = Pattern.compile("(#|<<|>>)");
+        Matcher mat_simbolos = pat_simbolos.matcher(elemento);
+        if (mat_simbolos.matches())
+        {
+            System.out.println("SI");
+        }
+        else
+        {
+            System.out.println("NO");
+        }
+        
+        
+        Pattern pat_identificador = Pattern.compile("([a-zA-Z]([a-zA-Z]|[0-9]|_)*)");
+        Matcher mat_identificador = pat_identificador.matcher(elemento);
+        if (mat_identificador.matches())
+        {
+            System.out.println("SI");
+        }
+        else
+        {
+            System.out.println("NO");
+        }
+        
+        
+        
         
         
     }
