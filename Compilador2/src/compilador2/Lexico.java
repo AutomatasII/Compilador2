@@ -33,13 +33,44 @@ public class Lexico {
     *@param elemento string que puede ser simbolo o palabra que esta separada en un token
     */
     public void Expresiones(String elemento){
-        Pattern librerias = Pattern.compile("(iostream|fstream|iosfwd|list|cmath|memory|numeric|cstdio|cstring|cstdlib)");
-     Matcher mat = librerias.matcher(elemento);
-     if (mat.matches()) {
-         System.out.println("SI");
-     } else {
-         System.out.println("NO");
-     }
+        
+        Pattern pat_librerias = Pattern.compile("(iostream|fstream|iosfwd|list|cmath|memory|numeric|cstdio|cstring|cstdlib)");
+        Matcher mat_librerias = pat_librerias.matcher(elemento);
+        if (mat_librerias.matches())
+        {
+            System.out.println("SI");
+        }
+        else
+        {
+            System.out.println("NO");
+        }
+        
+        Pattern pat_reservadas = Pattern.compile("(auto|const|double|float|int|"
+                + "short|struct|unsigned|break|continue|else|for|long|signed|"
+                + "switch|void|case|default|enum|goto|register|sizeof|typedef|"
+                + "volatile|char|do|extern|if|return|static|union|while)");
+        Matcher mat_reservadas = pat_reservadas.matcher(elemento);
+        if (mat_reservadas.matches())
+        {
+            System.out.println("SI");
+        }
+        else
+        {
+            System.out.println("NO");
+        }
+        
+        Pattern pat_opAritmeticos = Pattern.compile("(+|-|*|/)");
+        Matcher mat_opAritmeticos = pat_opAritmeticos.matcher(elemento);
+        if (mat_reservadas.matches())
+        {
+            System.out.println("SI");
+        }
+        else
+        {
+            System.out.println("NO");
+        }
+        
+        
     }
     
     
