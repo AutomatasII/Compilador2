@@ -14,6 +14,7 @@ public class Lexico {
     private StringTokenizer lista_separada_linea;
     
     //Uriel
+    //
     public Lexico(String texto) {
         //String con todo el codigo
         lista_separada_linea = new StringTokenizer(texto,"\n");
