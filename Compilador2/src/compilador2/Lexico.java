@@ -39,13 +39,16 @@ public class Lexico {
         if (mat_librerias.matches())
         {
             System.out.println("SI");
+            String expresion = "lib";
+           int val = mapeo(elemento,expresion);
+           System.out.println("Valor : "+val);
         }
         else
         {
             System.out.println("NO");
         }
         
-        Pattern pat_reservadas = Pattern.compile("(auto|const|double|float|int|"
+       /* Pattern pat_reservadas = Pattern.compile("(auto|const|double|float|int|"
                 + "short|struct|unsigned|break|continue|else|for|long|signed|"
                 + "switch|void|case|default|enum|goto|register|sizeof|typedef|"
                 + "volatile|char|do|extern|if|return|static|union|while)");
@@ -59,7 +62,7 @@ public class Lexico {
             System.out.println("NO");
         }
         
-        Pattern pat_opAritmeticos = Pattern.compile("(+|-|*|/)");
+        Pattern pat_opAritmeticos = Pattern.compile("(\\+|\\-|\\*|\\/)");
         Matcher mat_opAritmeticos = pat_opAritmeticos.matcher(elemento);
         if (mat_reservadas.matches())
         {
@@ -68,7 +71,7 @@ public class Lexico {
         else
         {
             System.out.println("NO");
-        }
+        }*/
         
         
     }
@@ -79,6 +82,27 @@ public class Lexico {
             Tokens(lista_separada_linea.nextToken());
         }
    
+    }
+    
+    public int mapeo(String elemento, String expresion){
+                //Librerias
+                Map<String,Integer> map = new HashMap<>();
+                map.put("iostream",10);		
+                map.put("fsting",11 );		
+                map.put("iosfw",12 );	
+                map.put("list",13 );	
+                map.put("cmath",14 );	
+                map.put("memory",15 );
+                map.put("numeric",16 );
+                map.put("cstdio",17 );
+                map.put("cstring",18 );
+                map.put("cstdlib",19 );
+               
+              int val = map.get(elemento);
+              
+              return val;
+     
+                
     }
     
     
