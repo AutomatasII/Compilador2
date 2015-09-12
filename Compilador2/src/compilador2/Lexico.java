@@ -12,9 +12,7 @@ import java.util.regex.Pattern;
 public class Lexico {
 
     private StringTokenizer lista_separada_linea;
-    //Cynthia
-    // &
-    //Uriel
+    
     //
     public Lexico(String texto) {
         //String con todo el codigo
