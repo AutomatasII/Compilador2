@@ -38,14 +38,14 @@ public class Lexico {
         Matcher mat_librerias = pat_librerias.matcher(elemento);
         if (mat_librerias.matches())
         {
-            System.out.println("SI");
+            System.out.println(elemento+" SI es libreria");
             String expresion = "lib";
            int val = mapeo(elemento,expresion);
            System.out.println("Valor : "+val);
         }
         else
         {
-            System.out.println("NO");
+            System.out.println(elemento+" NO es libreria");
         }
         
         
@@ -53,15 +53,15 @@ public class Lexico {
                 + "short|struct|unsigned|break|continue|else|for|long|signed|"
                 + "switch|void|case|default|enum|goto|register|sizeof|typedef|"
                 + "volatile|char|string|do|extern|if|return|static|union|while|"
-                + "true|false|using|namespace|std)");
+                + "true|false|using|namespace|std|cout|cin|main|include)");
         Matcher mat_reservadas = pat_reservadas.matcher(elemento);
         if (mat_reservadas.matches())
         {
-            System.out.println("SI");
+            System.out.println(elemento+" SI es palabra reservada");
         }
         else
         {
-            System.out.println("NO");
+            System.out.println(elemento+ " NO es palabra reservada");
         }
         
         
@@ -69,23 +69,23 @@ public class Lexico {
         Matcher mat_opAritmeticos = pat_opAritmeticos.matcher(elemento);
         if (mat_opAritmeticos.matches())
         {
-            System.out.println("SI");
+            System.out.println(elemento+ " SI es operador aritmetico");
         }
         else
         {
-            System.out.println("NO");
-        }*/
+            System.out.println(elemento+ " NO es operador aritmetico");
+        }
         
         
         Pattern pat_opAsignacion = Pattern.compile("(=|\\*=|/=|%=|\\+=|-=|<<=|>>=|&=|\\^=|\\|=)");
         Matcher mat_opAsignacion = pat_opAsignacion.matcher(elemento);
         if (mat_opAsignacion.matches())
         {
-            System.out.println("SI");
+            System.out.println(elemento+ " SI es operador de asignacion");
         }
         else
         {
-            System.out.println("NO");
+            System.out.println(elemento+ " NO es operador de asignacion");
         }
         
         
@@ -93,11 +93,11 @@ public class Lexico {
         Matcher mat_puntuacion = pat_puntuacion.matcher(elemento);
         if (mat_puntuacion.matches())
         {
-            System.out.println("SI");
+            System.out.println(elemento+ " SI es puntuacion");
         }
         else
         {
-            System.out.println("NO");
+            System.out.println(elemento+ " NO es puntuacion");
         }
         
         
@@ -105,11 +105,11 @@ public class Lexico {
         Matcher mat_opComparacion = pat_opComparacion.matcher(elemento);
         if (mat_opComparacion.matches())
         {
-            System.out.println("SI");
+            System.out.println(elemento+ " SI es comparacion");
         }
         else
         {
-            System.out.println("NO");
+            System.out.println(elemento+ " NO es comparcion");
         }
         
         
@@ -117,11 +117,11 @@ public class Lexico {
         Matcher mat_opLogicos = pat_opLogicos.matcher(elemento);
         if (mat_opLogicos.matches())
         {
-            System.out.println("SI");
+            System.out.println(elemento+ " SI es logico");
         }
         else
         {
-            System.out.println("NO");
+            System.out.println(elemento+ " NO es logico");
         }
         
         
@@ -129,11 +129,11 @@ public class Lexico {
         Matcher mat_agrupan = pat_agrupan.matcher(elemento);
         if (mat_agrupan.matches())
         {
-            System.out.println("SI");
+            System.out.println(elemento+ " SI es agrupacion");
         }
         else
         {
-            System.out.println("NO");
+            System.out.println(elemento+ " NO es agrupacion");
         }
         
         
@@ -141,11 +141,11 @@ public class Lexico {
         Matcher mat_simbolos = pat_simbolos.matcher(elemento);
         if (mat_simbolos.matches())
         {
-            System.out.println("SI");
+            System.out.println(elemento+ " SI es simbolo");
         }
         else
         {
-            System.out.println("NO");
+            System.out.println(elemento+ " NO es simbolo");
         }
         
         
@@ -153,11 +153,22 @@ public class Lexico {
         Matcher mat_identificador = pat_identificador.matcher(elemento);
         if (mat_identificador.matches())
         {
-            System.out.println("SI");
+            System.out.println(elemento+ " SI es identificador");
         }
         else
         {
-            System.out.println("NO");
+            System.out.println(elemento+ " NO es identificador");
+        }
+        
+        Pattern pat_numero = Pattern.compile("([0-9]*)");
+        Matcher mat_numero = pat_numero.matcher(elemento);
+        if (mat_numero.matches())
+        {
+            System.out.println(elemento+ " SI es numero");
+        }
+        else
+        {
+            System.out.println(elemento+ " NO es numero\n\n");
         }
         
         
