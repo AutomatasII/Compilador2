@@ -14,8 +14,10 @@ public class Lexico {
     private StringTokenizer lista_separada_linea;
     private Map<String,Integer> map;
     private int i;
+    int num_linea;
     private ArrayList sentencias;
     private String texto;
+    ArrayList<Token> errores;
     
     public Lexico(String texto) {
         this.texto = texto;
@@ -23,9 +25,11 @@ public class Lexico {
         lista_separada_linea = new StringTokenizer(texto,"\n");
         map = new HashMap<>();
         sentencias = new ArrayList<>();
+        errores = new ArrayList<>();
         i = 1000;
+        num_linea = 0;
+        
         init();
-        init2();
     }
     
     /**
@@ -33,9 +37,16 @@ public class Lexico {
     *
     */
      public void init(){
+         int k =1;
+         System.out.println("El programa tiene "+lista_separada_linea.countTokens()+" lineas \n");
         while(lista_separada_linea.hasMoreTokens()){
             sentencias.add(Tokens(lista_separada_linea.nextToken()));
-        }     
+            System.out.println("entron "+k+" veces");
+            k++;
+            num_linea++;
+        }
+         
+        
     }
      
      public ArrayList<Token> init2(){
@@ -47,11 +58,32 @@ public class Lexico {
         ArrayList<Token> sentencia = new ArrayList<>();
         StringTokenizer lista_separada_espacio = new StringTokenizer(linea);
         while(lista_separada_espacio.hasMoreTokens()){
-            sentencia.add(Expresiones(lista_separada_espacio.nextToken()));
+            Token token_posible = null;
+            token_posible = Expresiones(lista_separada_espacio.nextToken());
+            if(token_posible.codigo != 0){
+            sentencia.add(token_posible);
+            }else{
+                Token token_error = new Token(token_posible.categoria, num_linea);
+                Errores(token_error);
+                System.out.println("El simbolo "+token_posible.categoria+" en la linea "+num_linea+" no esta permitido ");
+            }  
         }
         
         return sentencia;
     
+    }
+    public void Errores(Token error){
+        errores.add(error);
+    }
+    
+    /**
+    * Regresa un Arraylist de Tokens donde el string es el error y el int es la linea
+    *@param elemento string que puede ser simbolo o palabra que esta separada en un token 
+    * @param expresion string que dice en que tipo de expresion regular matcheo el token
+    */
+    public ArrayList<Token> getErrores(){
+        
+        return errores;
     }
    /**
     * Revisa si el elemento mandado matchea con una expresion regular
@@ -59,6 +91,8 @@ public class Lexico {
     */
     public Token Expresiones(String elemento){
         Token token = null;
+        Token token2 = null;
+        int k = 0;
         String expresion = null;
         Pattern pat_librerias = Pattern.compile("(iostream|fstream|iosfwd|list|cmath|memory|numeric|cstdio|cstring|cstdlib)");
         Matcher mat_librerias = pat_librerias.matcher(elemento);
@@ -68,6 +102,7 @@ public class Lexico {
            expresion = "libreria";
            int val = mapeo(elemento,expresion);
            token = new Token(expresion, val);
+           k = 1;
            //System.out.println("Valor : "+val);
         }
         else
@@ -88,6 +123,7 @@ public class Lexico {
             expresion = "palabra_reservada";
             int val = mapeo(elemento,expresion);
             token = new Token(expresion, val);
+            k = 1;
         }
         else
         {
@@ -103,6 +139,7 @@ public class Lexico {
             expresion = "operador_aritmetico";
             int val = mapeo(elemento,expresion);
             token = new Token(expresion, val);
+            k = 1;
         }
         else
         {
@@ -118,6 +155,7 @@ public class Lexico {
             expresion = "operador_asignacion";
             int val = mapeo(elemento,expresion);
             token = new Token(expresion, val);
+            k = 1;
         }
         else
         {
@@ -125,7 +163,7 @@ public class Lexico {
         }
         
         
-        Pattern pat_puntuacion = Pattern.compile("(.|,|;|:)");
+        Pattern pat_puntuacion = Pattern.compile("([.|,|;|:])");
         Matcher mat_puntuacion = pat_puntuacion.matcher(elemento);
         if (mat_puntuacion.matches())
         {
@@ -133,6 +171,7 @@ public class Lexico {
             expresion = "simbolo_puntuacion";
             int val = mapeo(elemento,expresion);
             token = new Token(expresion, val);
+            k = 1;
         }
         else
         {
@@ -148,6 +187,7 @@ public class Lexico {
             expresion = "simbolo_comparacion";
             int val = mapeo(elemento,expresion);
             token = new Token(expresion, val);
+            k = 1;
         }
         else
         {
@@ -163,6 +203,7 @@ public class Lexico {
             expresion = "simbolo_logico";
             int val = mapeo(elemento,expresion);
             token = new Token(expresion, val);
+            k = 1;
         }
         else
         {
@@ -170,7 +211,7 @@ public class Lexico {
         }
         
         
-        Pattern pat_agrupan = Pattern.compile("(\\(|\\)|\\{|\\}|\\[|\\]|[\"]|[\'])");
+        Pattern pat_agrupan = Pattern.compile("(\\(|\\)|\\{|\\}|\\[|\\]|[\'])");
         Matcher mat_agrupan = pat_agrupan.matcher(elemento);
         if (mat_agrupan.matches())
         {
@@ -178,6 +219,7 @@ public class Lexico {
             expresion = "simbolo_agrupacion";
             int val = mapeo(elemento,expresion);
             token = new Token(expresion, val);
+            k = 1;
             
         }
         else
@@ -185,6 +227,21 @@ public class Lexico {
             System.out.println(elemento+ " NO es agrupacion");
         }
         
+        Pattern pat_agrupamiento_de_texto = Pattern.compile("\"");
+        Matcher mat_agrupamiento_de_texto = pat_agrupamiento_de_texto.matcher(elemento);
+        if (mat_agrupamiento_de_texto.matches())
+        {
+            System.out.println(elemento+ " SI es agrupacion de texto");
+            expresion = "agrupacion_texto";
+            int val = mapeo(elemento,expresion);
+            token = new Token(expresion, val);
+            k = 1;
+            
+        }
+        else
+        {
+            System.out.println(elemento+ " NO es agrupacion");
+        }
         
         Pattern pat_simbolos = Pattern.compile("(#|<<|>>)");
         Matcher mat_simbolos = pat_simbolos.matcher(elemento);
@@ -194,6 +251,7 @@ public class Lexico {
             expresion = "simbolo";
             int val = mapeo(elemento,expresion);
             token = new Token(expresion, val);
+            k = 1;
         }
         else
         {
@@ -210,6 +268,7 @@ public class Lexico {
             mapeo(elemento,expresion);
             int val = mapeo(elemento,expresion);
             token = new Token(expresion, val);
+            k = 1;
         }
         else
         {
@@ -224,10 +283,11 @@ public class Lexico {
             expresion = "numero_constante";
             int val = mapeo(elemento,expresion);
             token = new Token(expresion, val);
+            k = 1;
         }
         else
         {
-            System.out.println(elemento+ " NO es constante\n");
+            System.out.println(elemento+ " NO es constante");
         }
         
         Pattern pat_real = Pattern.compile("(-?[0-9]+.[0-9]+)");
@@ -238,15 +298,20 @@ public class Lexico {
             expresion = "numero_real";
             int val = mapeo(elemento,expresion);
             token = new Token(expresion, val);
+            k = 1;
         }
         else
         {
-            System.out.println(elemento+ " NO es real\n\n");
+            System.out.println(elemento+ " NO es real");
         }
         
         
+        if(k == 1){
         return token;
-        
+        }else{
+        token2 = new Token(expresion,k);
+        return token2;
+        }
         
         
         
@@ -374,7 +439,12 @@ public class Lexico {
                 map.put(">>",503);
                 
                 if((expresion == "identificador") && !(map.containsValue(elemento))){
-                    map.put(elemento,i++);    
+                    map.put(elemento,i++);
+                    i = i+1;
+                }
+                if((expresion == "numero_constante") && !(map.containsValue(elemento))){
+                    map.put(elemento,i++);
+                    i = i+1;
                 }
                   
               int val = map.get(elemento);
