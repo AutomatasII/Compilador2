@@ -130,6 +130,9 @@ public class VentanaCompliador extends javax.swing.JFrame {
     private void analizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analizarActionPerformed
         if(!texto.getText().equals("")){
             analisis_lexico = new Lexico(texto.getText());
+            analisis_lexico.init();
+            //System.out.println( analisis_lexico.toString());
+            //System.out.println(analisis_lexico.toStringTextoCompleto());
             
         }
     }//GEN-LAST:event_analizarActionPerformed
