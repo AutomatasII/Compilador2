@@ -53,6 +53,7 @@ public class Sintactico {
     public boolean BuscarMain(int posicion, ArrayList<Token> sentencia) {
         if (sentencia.get(posicion).codigo == 54) {
             BuscarMain(posicion + 1, sentencia);
+            return true;
         }
         if (sentencia.get(posicion).codigo == 90) {
             return true;
@@ -117,7 +118,20 @@ public class Sintactico {
     
     public void Analizar() {
         for (Object i : comparacion) {
-                BuscarMain(0, aux);
+            int cont=0;
+            ArrayList<Token> aux = (ArrayList<Token>) i;
+            if(!BuscarMain(0, aux))
+                {
+                   System.out.println("Main not found nigga!");
+                    
+                }
+                
+            /*BuscarDeclaracion(0, aux, null);
+            BuscarFor(0, aux);
+            BuscarIf(0, aux);
+            BuscarOperacion(0, aux);
+            BuscarWhile(0, aux);
+                */
 
         }
 

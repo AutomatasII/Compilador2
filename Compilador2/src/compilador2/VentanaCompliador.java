@@ -133,10 +133,11 @@ public class VentanaCompliador extends javax.swing.JFrame {
             analisis_lexico = new Lexico(texto.getText());
             analisis_lexico.init();
             analisis_sintactico = new Sintactico(analisis_lexico.getSentencias());
+            analisis_sintactico.Analizar();
             ArrayList<Token> errores = analisis_lexico.getErrores();
-            System.out.println(errores.size());
+            /*System.out.println(errores.size());
             System.out.println( analisis_lexico.toString());
-            System.out.println(analisis_lexico.toStringTextoCompleto());   
+            System.out.println(analisis_lexico.toStringTextoCompleto());   */
         i++;
         }
         
