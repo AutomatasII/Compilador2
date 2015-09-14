@@ -134,8 +134,8 @@ public class VentanaCompliador extends javax.swing.JFrame {
             analisis_lexico.init();
             ArrayList<Token> errores = analisis_lexico.getErrores();
             System.out.println(errores.size());
-            //System.out.println( analisis_lexico.toString());
-            //System.out.println(analisis_lexico.toStringTextoCompleto());   
+            System.out.println( analisis_lexico.toString());
+            System.out.println(analisis_lexico.toStringTextoCompleto());   
         i++;
         }
         
