@@ -19,15 +19,42 @@ public class Sintactico {
     public Sintactico(ArrayList aux) {
         comparacion = aux;
     }
+    public boolean BuscarDeclaracion(int posicion, ArrayList<Token> sentencia, String texto)
+    {
+        if (sentencia.get(posicion).codigo == 52) {
+            BuscarDeclaracion(posicion + 1, sentencia, "double");
+        }
+        if (sentencia.get(posicion).codigo == 53) {
+            BuscarDeclaracion(posicion + 1, sentencia, "float");
+        }
+        if (sentencia.get(posicion).codigo == 54) {
+            BuscarDeclaracion(posicion + 1, sentencia, "int");
+        }
+        if (sentencia.get(posicion).codigo == 55) {
+            BuscarDeclaracion(posicion + 1, sentencia, "short");
+        }
+        if (sentencia.get(posicion).codigo == 74) {
+            BuscarDeclaracion(posicion + 1, sentencia, "char");
+        }
+        if (sentencia.get(posicion).codigo == 75) {
+            BuscarDeclaracion(posicion + 1, sentencia, "String");
+        }
+        if (sentencia.get(posicion).codigo > 1000) {
+            sentencia.get(posicion).tipo_dato=texto;
+            BuscarDeclaracion(posicion+1, sentencia, texto);
+        }
+         if (sentencia.get(posicion).codigo == 90) {
+            return true;
+        }
+        
+        return false;
+    }
 
     public boolean BuscarMain(int posicion, ArrayList<Token> sentencia) {
         if (sentencia.get(posicion).codigo == 54) {
             BuscarMain(posicion + 1, sentencia);
         }
-        if (sentencia.get(posicion).codigo == 1) {
-            BuscarMain(posicion + 1, sentencia);
-        }
-        if (sentencia.get(posicion).codigo == 90 || sentencia.get(posicion).codigo == 302) {
+        if (sentencia.get(posicion).codigo == 90) {
             return true;
         }
         return false;
@@ -90,11 +117,7 @@ public class Sintactico {
     
     public void Analizar() {
         for (Object i : comparacion) {
-            ArrayList<Token> aux = (ArrayList<Token>) i;
-            for (int j = 0; j < aux.size(); j++) {
-                BuscarMain(j, aux);
-
-            }
+                BuscarMain(0, aux);
 
         }
 
