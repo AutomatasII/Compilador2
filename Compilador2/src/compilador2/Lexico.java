@@ -481,7 +481,9 @@ public class Lexico {
         
         return aux;
     }
-    
+     public ArrayList getSentencias(){
+         return sentencias;
+     }
     
     
 }
