@@ -128,10 +128,17 @@ public class VentanaCompliador extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void analizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analizarActionPerformed
-        if(!texto.getText().equals("")){
+        int i = 0;
+        if((!texto.getText().equals("")) &&(i == 0)){ 
             analisis_lexico = new Lexico(texto.getText());
-            analisis_lexico.impLista();
+            analisis_lexico.init();
+            ArrayList<Token> errores = analisis_lexico.getErrores();
+            System.out.println(errores.size());
+            //System.out.println( analisis_lexico.toString());
+            //System.out.println(analisis_lexico.toStringTextoCompleto());   
+        i++;
         }
+        
     }//GEN-LAST:event_analizarActionPerformed
 
     /**
