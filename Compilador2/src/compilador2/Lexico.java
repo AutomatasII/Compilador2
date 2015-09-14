@@ -266,6 +266,8 @@ public class Lexico {
         map.put("*", 202);
         map.put("/", 203);
         map.put("%", 204);
+        map.put("++", 205);
+        map.put("--", 206);
 
         //ASIGNACION
         map.put("=", 250);

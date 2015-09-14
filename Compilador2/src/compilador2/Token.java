@@ -12,10 +12,12 @@ package compilador2;
 public class Token{
     int codigo;
     String categoria;
+    String tipo_dato;
 
     public Token(String cate, int cod) {
         categoria = cate;
         codigo = cod;
+        tipo_dato = null;
     }
      public Token() {
         
